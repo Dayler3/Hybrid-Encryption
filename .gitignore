@@ -1,0 +1,11 @@
+# Секретные данные
+keys/
+config.json
+data/
+
+# Файлы сборки и кеш
+dist/
+__pycache__/
+venv/
+.idea/
+.vscode/
