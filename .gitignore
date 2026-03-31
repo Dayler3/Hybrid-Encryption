@@ -3,8 +3,7 @@ keys/
 config.json
 data/
 
-# Файлы сборки и кеш
-dist/
+# Кеш
 __pycache__/
 venv/
 .idea/
