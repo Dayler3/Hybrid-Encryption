@@ -7,6 +7,8 @@
 ![GitHub](https://img.shields.io/github/license/Dayler3/Hybrid-Encryption)
 ![GitHub Repo stars](https://img.shields.io/github/stars/Dayler3/Hybrid-Encryption)
 
+![Logotype](./assets/logo_Encryption.png)
+
 ## Технические характеристики
 
 *   **Симметричное шифрование:** AES-256 в режиме GCM (Galois/Counter Mode). Реализует аутентифицированное шифрование, гарантирующее конфиденциальность и целостность данных (защита от атак типа bit-flipping).
