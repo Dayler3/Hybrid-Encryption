@@ -2,9 +2,9 @@ name: Code Style Check (PEP8)
 
 on:
   push:
-    branches: main
+    branches: [main]
   pull_request:
-    branches: main
+    branches: [main]
 
 jobs:
   lint:
@@ -35,6 +35,6 @@ jobs:
           flake8 src/ main.py --count --statistics --show-source
 
       # Finalize with failure if any step failed
-     - name: Fail on violations
+      - name: Fail on violations
         if: failure()
         run: exit 1
