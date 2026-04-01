@@ -178,7 +178,7 @@ class App(ctk.CTk):
         self.btn_enc.pack_forget()
         self.btn_dec.pack_forget()
         self.btn_stop.pack(pady=5, after=self.p_bar)
-        self.write_log(f"Старт: {'Шифрование' if mode=='encrypt' else 'Расшифровка'}")
+        self.write_log(f"Старт: {'Шифрование' if mode == 'encrypt' else 'Расшифровка'}")
         if mode == "encrypt":
             self.proc.run_async(self.selected_files, mode, self.conf["encrypt_dir"])
         else:
