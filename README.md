@@ -4,8 +4,8 @@
 
 ![Static Badge](https://img.shields.io/badge/Dayler3-Hybrid_Encryption-Hybrid_Encryption)
 ![GitHub top language](https://img.shields.io/github/languages/top/Dayler3/Hybrid-Encryption)
-![GitHub](https://img.shields.io/github/license/Dayler3/Hybrid-Encryption)
-![GitHub repo stars](https://img.shields.io/github/stars/Dayler3/Hybrid-Encryption)
+![GitHub license](https://img.shields.io/github/license/Dayler3/Hybrid-Encryption?label=license&style=flat)
+![GitHub Repo stars](https://img.shields.io/github/stars/Dayler3/Hybrid-Encryption?label=Stars&style=social)
 
 ![Logotype](./assets/logo_Encryption.png)
 
