@@ -1,0 +1,28 @@
+[flake8]
+max-line-length = 120
+extend-ignore =
+    E203,   # пробелы перед :, =
+    W503,   # разрыв строки перед бинарным оператором
+    E266,   # много символа #
+    E731,   # lambda вместо def 
+    F401,   # неиспользуемые импорты
+
+# Исключение служебных и генерируемых файлов
+exclude =
+    .git,
+    __pycache__,
+    venv,
+    env,
+
+# Игнорируем конкретные файлы/паттерны
+per-file-ignores =
+    src/__init__.py: F401
+    main.py: E501  # Длинные строки могут быть оправданы
+    requirements.txt: ALL
+    README.md: ALL
+    LICENSE: ALL
+
+# Дополнительные настройки
+statistics = True
+show-source = True
+verbose = 0
