@@ -19,7 +19,7 @@ class ConfigManager:
             try:
                 with open(self.config_file, "r", encoding="utf-8") as f:
                     return {**self.default_config, **json.load(f)}
-            except: 
+            except:
                 return self.default_config
         return self.default_config
 
@@ -32,7 +32,8 @@ class FileSystem:
 
     @staticmethod
     def format_bytes(size_bytes):
-        if size_bytes == 0: return "0 B"
+        if size_bytes == 0:
+            return "0 B"
         units = ("B", "KB", "MB", "GB")
         i = 0
         while size_bytes >= 1024 and i < len(units) - 1:
@@ -44,14 +45,13 @@ class FileSystem:
     def get_formatted_size(path):
         try:
             return FileSystem.format_bytes(os.path.getsize(path))
-        except: 
+        except:
             return "0 B"
 
     @staticmethod
     def open_explorer(path):
-        if not os.path.exists(path): 
+        if not os.path.exists(path):
             os.makedirs(path, exist_ok=True)
-            
         if platform.system() == "Windows":
             os.startfile(path)
         elif platform.system() == "Darwin":
@@ -69,5 +69,5 @@ class Hasher:
                 for byte_block in iter(lambda: f.read(4096), b""):
                     sha256_hash.update(byte_block)
             return sha256_hash.hexdigest()
-        except: 
+        except:
             return "Ошибка хеша"

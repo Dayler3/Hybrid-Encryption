@@ -3,7 +3,9 @@ from cryptography.hazmat.primitives.asymmetric import rsa, padding
 from cryptography.hazmat.primitives import serialization, hashes
 from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
 
+
 class KeyManager:
+
     def __init__(self, keys_dir="keys"):
         self.keys_dir = keys_dir
         os.makedirs(self.keys_dir, exist_ok=True)
@@ -31,8 +33,9 @@ class KeyManager:
         with open(os.path.join(self.keys_dir, "public_key.pem"), "rb") as f:
             return serialization.load_pem_public_key(f.read())
 
+
 class FileEncryptor:
-    CHUNK_SIZE = 4 * 1024 * 1024 
+    CHUNK_SIZE = 4 * 1024 * 1024
 
     def encrypt_file(self, file_path, output_path, public_key, progress_cb=None, stop_check=None):
         f_size = os.path.getsize(file_path)
@@ -44,14 +47,18 @@ class FileEncryptor:
         cipher = Cipher(algorithms.AES(aes_key), modes.CTR(nonce))
         encryptor = cipher.encryptor()
         with open(file_path, 'rb') as f_in, open(output_path, 'wb') as f_out:
-            f_out.write(len(enc_aes_key).to_bytes(4, 'big')); f_out.write(enc_aes_key); f_out.write(nonce)
+            f_out.write(len(enc_aes_key).to_bytes(4, 'big'))
+            f_out.write(enc_aes_key)
+            f_out.write(nonce)
             while chunk := f_in.read(self.CHUNK_SIZE):
-                if stop_check and stop_check(): return False
+                if stop_check and stop_check():
+                    return False
                 f_out.write(encryptor.update(chunk))
                 b_proc += len(chunk)
                 curr_prog = b_proc / f_size
                 if progress_cb and (curr_prog - last_ui_update >= 0.01 or b_proc == f_size):
-                    progress_cb(curr_prog); last_ui_update = curr_prog
+                    progress_cb(curr_prog)
+                    last_ui_update = curr_prog
             f_out.write(encryptor.finalize())
         return True
 
@@ -60,18 +67,22 @@ class FileEncryptor:
         b_proc = 0
         last_ui_update = 0
         with open(encrypted_path, 'rb') as f_in:
-            k_len = int.from_bytes(f_in.read(4), 'big'); enc_aes_key = f_in.read(k_len); nonce = f_in.read(16)
+            k_len = int.from_bytes(f_in.read(4), 'big')
+            enc_aes_key = f_in.read(k_len)
+            nonce = f_in.read(16)
             b_proc += (4 + k_len + 16)
             aes_key = private_key.decrypt(enc_aes_key, padding.OAEP(mgf=padding.MGF1(hashes.SHA256()), algorithm=hashes.SHA256(), label=None))
             cipher = Cipher(algorithms.AES(aes_key), modes.CTR(nonce))
             decryptor = cipher.decryptor()
             with open(output_path, 'wb') as f_out:
                 while chunk := f_in.read(self.CHUNK_SIZE):
-                    if stop_check and stop_check(): return False
+                    if stop_check and stop_check():
+                        return False
                     f_out.write(decryptor.update(chunk))
                     b_proc += len(chunk)
                     curr_prog = b_proc / f_size
                     if progress_cb and (curr_prog - last_ui_update >= 0.01 or b_proc == f_size):
-                        progress_cb(curr_prog); last_ui_update = curr_prog
+                        progress_cb(curr_prog)
+                        last_ui_update = curr_prog
                 f_out.write(decryptor.finalize())
         return True
