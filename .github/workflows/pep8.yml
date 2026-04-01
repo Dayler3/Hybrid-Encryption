@@ -9,6 +9,10 @@ on:
 jobs:
   lint:
     runs-on: ubuntu-latest
+
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true # Временное решение для Node.js 24
+
     strategy:
       matrix:
         python-version: ['3.12', '3.13', '3.14']  # Проверяем на нескольких версиях
