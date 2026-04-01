@@ -1,0 +1,40 @@
+name: Code Style Check (PEP8)
+
+on:
+  push:
+    branches: main
+  pull_request:
+    branches: main
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    strategy:
+          matrix:
+            python-version: ['3.12', '3.13', '3.14']  # проверяем на нескольких версиях
+
+    steps:
+      # Step 1. Download repo
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Step 2. Setting up Python
+      - name: Set up Python ${{ matrix.python-version }} # проверка на каждой версии отдельно
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      # Step 3. Install dependencies
+      - name: Install flake8
+        run: pip install flake8
+
+      # Step 4. Running flake8
+      - name: Run flake8 on src/ and main.py
+        run: |
+          echo "Running flake8 on src/ and main.py..."
+          flake8 src/ main.py --count --statistics --show-source
+
+      # Finalizing with failure if any step failed
+      - name: Fail on violations
+        if: failure()
+        run: exit 1
