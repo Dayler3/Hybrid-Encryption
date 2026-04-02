@@ -27,7 +27,7 @@
 1. Клонирование репозитория
 
 ```
-git clone https://github.com
+git clone https://github.com/Dayler3/Hybrid-Encryption
 ```
 
 2. Переход в директорию:
