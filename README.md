@@ -33,7 +33,7 @@ git clone https://github.com/Dayler3/Hybrid-Encryption
 2. Переход в директорию:
 
 ```
-cd hybrid-encryption
+cd Hybrid-Encryption-main
 ```
 
 3. Создание и активация виртуального окружения:
